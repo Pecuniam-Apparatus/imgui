@@ -850,7 +850,9 @@ bool ImGui::CloseButton(ImGuiID id, const ImVec2& pos)
     // Tweak 1: Shrink hit-testing area if button covers an abnormally large proportion of the visible region. That's in order to facilitate moving the window away. (#3825)
     // This may better be applied as a general hit-rect reduction mechanism for all widgets to ensure the area to move window is always accessible?
 #ifdef WIN98 // close button size
-    const ImRect bb(pos, pos + ImVec2(16.0f, 14.0f));
+    const ImVec2 d(8.f, 7.f);
+    const ImVec2 pd(0.f, 3.5f);
+    ImRect bb(pos - d + pd, pos + d + pd);
 #else
     const ImRect bb(pos, pos + ImVec2(g.FontSize, g.FontSize));
 #endif
@@ -898,7 +900,9 @@ bool ImGui::CollapseButton(ImGuiID id, const ImVec2& pos)
     ImGuiWindow* window = g.CurrentWindow;
 
 #ifdef WIN98 // collapse button size
-    ImRect bb(pos, pos + ImVec2(16.0f, 14.0f));
+    const ImVec2 d(8.f, 7.f);
+    const ImVec2 pd(0.f, 3.5f);
+    ImRect bb(pos - d + pd, pos + d + pd);
 #else
     ImRect bb(pos, pos + ImVec2(g.FontSize, g.FontSize));
 #endif
